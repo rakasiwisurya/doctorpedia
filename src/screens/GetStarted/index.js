@@ -3,7 +3,7 @@ import React from 'react';
 import {ILGetStarted, ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
 
-export default function GetStarted() {
+export default function GetStarted({navigation}) {
   return (
     <ImageBackground source={ILGetStarted} style={styles.screen}>
       <View>
@@ -13,9 +13,21 @@ export default function GetStarted() {
         </Text>
       </View>
       <View>
-        <Button variant="primary">Get Started</Button>
+        <Button
+          variant="primary"
+          onPress={() => {
+            navigation.navigate('Register');
+          }}>
+          Get Started
+        </Button>
         <Gap height={16} />
-        <Button variant="secondary">Sign In</Button>
+        <Button
+          variant="secondary"
+          onPress={() => {
+            navigation.navigate('Login');
+          }}>
+          Sign In
+        </Button>
       </View>
     </ImageBackground>
   );

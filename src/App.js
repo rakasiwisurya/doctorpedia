@@ -1,11 +1,11 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {GetStarted, Splash} from './screens';
+import Router from './router';
 
 export default function App() {
   return (
-    <>
-      {/* <Splash /> */}
-      <GetStarted />
-    </>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   );
 }

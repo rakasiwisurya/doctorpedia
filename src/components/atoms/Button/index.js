@@ -1,12 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Button({variant, children}) {
+export default function Button({variant, children, onPress}) {
   return (
-    <View style={styles.container(variant)}>
+    <TouchableOpacity style={styles.container(variant)} onPress={onPress}>
       <Text style={styles.text(variant)}>{children}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -42,4 +42,5 @@ const styles = StyleSheet.create({
 Button.propTypes = {
   variant: PropTypes.oneOf(['primary', 'secondary']).isRequired,
   children: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
 };
