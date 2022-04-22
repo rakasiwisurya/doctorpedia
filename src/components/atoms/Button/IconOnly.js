@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {IconBackDark} from '../../../assets/icon';
+import {IconBackDark} from '../../../assets';
 
 export default function IconOnly({onPress, icon}) {
   const Icon = () => {

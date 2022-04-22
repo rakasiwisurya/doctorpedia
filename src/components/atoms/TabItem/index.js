@@ -8,7 +8,7 @@ import {
   IconHospitalsActive,
   IconMessages,
   IconMessagesActive,
-} from '../../../assets/icon';
+} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
 export default function TabItem({title, isActive, onPress, onLongPress}) {

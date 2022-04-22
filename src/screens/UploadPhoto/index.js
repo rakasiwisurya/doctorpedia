@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import {Button, Gap, Header, Link} from '../../components';
 import {ILNullPhoto} from '../../assets';
-import {IconAddPhoto} from '../../assets/icon';
+import {IconAddPhoto} from '../../assets';
 import {colors, fonts} from '../../utils';
 
 export default function UploadPhoto({navigation}) {
