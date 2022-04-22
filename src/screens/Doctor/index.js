@@ -12,36 +12,36 @@ import {colors, fonts} from '../../utils';
 export default function Doctor() {
   return (
     <View style={styles.screen}>
-      <View style={styles.content}>
-        <HomeProfile />
-        <Text style={styles.welcome}>
-          Mau konsultasi dengan siapa hari ini?
-        </Text>
-        <View style={styles.wrapperScroll}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.category}>
-              <Gap width={16} />
-              <DoctorCategory />
-              <DoctorCategory />
-              <DoctorCategory />
-              <DoctorCategory />
-              <Gap width={6} />
-            </View>
-          </ScrollView>
-        </View>
-        <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-        <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          <Gap height={30} />
+          <HomeProfile />
+          <Text style={styles.welcome}>
+            Mau konsultasi dengan siapa hari ini?
+          </Text>
+          <View style={styles.wrapperScroll}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={styles.category}>
+                <Gap width={16} />
+                <DoctorCategory />
+                <DoctorCategory />
+                <DoctorCategory />
+                <DoctorCategory />
+                <Gap width={6} />
+              </View>
+            </ScrollView>
+          </View>
+          <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
           <RatedDoctor />
           <RatedDoctor />
           <RatedDoctor />
+          <Text style={styles.sectionLabel}>Good News</Text>
+          <NewsItem />
+          <NewsItem />
+          <NewsItem />
+          <Gap height={30} />
         </View>
-        <Text style={styles.sectionLabel}>Good News</Text>
-        <View>
-          <NewsItem />
-          <NewsItem />
-          <NewsItem />
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingVertical: 30,
     paddingHorizontal: 16,
     backgroundColor: colors.white,
     flex: 1,
