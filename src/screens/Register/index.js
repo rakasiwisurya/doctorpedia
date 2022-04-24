@@ -1,5 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button, Gap, Header, Input} from '../../components';
 import {colors} from '../../utils';
 
@@ -36,3 +37,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
 });
+
+Register.propTypes = {
+  navigation: PropTypes.object,
+};

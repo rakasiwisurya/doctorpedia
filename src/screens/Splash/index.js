@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {ILLogo} from '../../assets';
 import {colors, fonts} from '../../utils';
 
@@ -36,3 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+Splash.propTypes = {
+  navigation: PropTypes.object,
+};

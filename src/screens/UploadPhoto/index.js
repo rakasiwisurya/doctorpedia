@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button, Gap, Header, Link} from '../../components';
 import {ILNullPhoto} from '../../assets';
 import {IconAddPhoto} from '../../assets';
@@ -76,3 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
+
+UploadPhoto.propTypes = {
+  navigation: PropTypes.object,
+};

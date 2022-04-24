@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {ILGetStarted, ILLogo} from '../../assets';
 import {Button, Gap} from '../../components';
 import {colors, fonts} from '../../utils';
@@ -49,3 +50,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[600],
   },
 });
+
+GetStarted.propTypes = {
+  navigation: PropTypes.object,
+};
