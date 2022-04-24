@@ -1,15 +1,15 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {DummyDoctor2} from '../../../assets';
+import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 
-export default function ListDoctor() {
+export default function ListDoctor({profile, name, desc}) {
   return (
     <View style={styles.container}>
-      <Image source={DummyDoctor2} style={styles.avatar} />
+      <Image source={profile} style={styles.avatar} />
       <View>
-        <Text style={styles.name}>Alexander Jennie</Text>
-        <Text style={styles.desc}>Baik ibu, terima kasih atas waktunya</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.desc}>{desc}</Text>
       </View>
     </View>
   );
@@ -40,3 +40,9 @@ const styles = StyleSheet.create({
     color: colors.text.secondary,
   },
 });
+
+ListDoctor.propTypes = {
+  profile: PropTypes.any.isRequired,
+  name: PropTypes.string.isRequired,
+  desc: PropTypes.string,
+};

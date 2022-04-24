@@ -1,16 +1,16 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
-import {DummyHospitals1} from '../../../assets';
+import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 
-export default function ListHospital() {
+export default function ListHospital({picture, type, name, address}) {
   return (
     <View style={styles.container}>
-      <Image source={DummyHospitals1} style={styles.picture} />
+      <Image source={picture} style={styles.picture} />
       <View>
-        <Text style={styles.title}>Rumah Sakit</Text>
-        <Text style={styles.title}>Citra Bunga Merdeka</Text>
-        <Text style={styles.address}>Jln. Surya Sejahtera 20</Text>
+        <Text style={styles.title}>{type}</Text>
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.address}>{address}</Text>
       </View>
     </View>
   );
@@ -41,3 +41,10 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 });
+
+ListHospital.propTypes = {
+  picture: PropTypes.any.isRequired,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+};
