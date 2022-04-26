@@ -3,8 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 import IconOnly from './IconOnly';
+import ButtonIconSend from './ButtonIconSend';
 
-export default function Button({variant, children, onPress, iconOnly, icon}) {
+export default function Button(props) {
+  const {variant, children, onPress, iconOnly, btnIconSend, icon, isDisabled} =
+    props;
+
+  if (btnIconSend) {
+    return <ButtonIconSend isDisabled={isDisabled} />;
+  }
+
   if (iconOnly) {
     return <IconOnly icon={icon} onPress={onPress} />;
   }
@@ -40,4 +48,6 @@ Button.propTypes = {
   onPress: PropTypes.func,
   iconOnly: PropTypes.bool,
   icon: PropTypes.string,
+  btnIconSend: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };

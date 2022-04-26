@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   DoctorCategory,
   Gap,
@@ -10,7 +11,7 @@ import {
 import {colors, fonts} from '../../utils';
 import {JSONCategoryDoctor} from '../../assets';
 
-export default function Doctor() {
+export default function Doctor({navigation}) {
   return (
     <View style={styles.screen}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -27,7 +28,11 @@ export default function Doctor() {
               <View style={styles.category}>
                 <Gap width={32} />
                 {JSONCategoryDoctor.data.map(item => (
-                  <DoctorCategory key={item.id} category={item.category} />
+                  <DoctorCategory
+                    key={item.id}
+                    category={item.category}
+                    onPress={() => navigation.navigate('ChooseDoctor')}
+                  />
                 ))}
                 <Gap width={22} />
               </View>
@@ -86,3 +91,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 });
+
+Doctor.propTypes = {
+  navigation: PropTypes.object,
+};

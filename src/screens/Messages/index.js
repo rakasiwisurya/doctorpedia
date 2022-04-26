@@ -13,15 +13,15 @@ export default function Messages() {
       desc: 'Baik bu, terima kasih atas wakt...',
     },
     {
-      id: 1,
+      id: 2,
       profile: DummyDoctor2,
-      name: 'Alexander Jannie',
+      name: 'John McParker Steve',
       desc: 'Baik bu, terima kasih atas wakt...',
     },
     {
-      id: 1,
+      id: 3,
       profile: DummyDoctor3,
-      name: 'Alexander Jannie',
+      name: 'Nairobi Putri Hayza',
       desc: 'Baik bu, terima kasih atas wakt...',
     },
   ]);

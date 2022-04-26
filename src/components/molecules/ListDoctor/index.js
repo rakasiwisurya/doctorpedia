@@ -1,17 +1,19 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
+import {IconNext} from '../../../assets';
 
-export default function ListDoctor({profile, name, desc}) {
+export default function ListDoctor({profile, name, desc, isNext, onPress}) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={profile} style={styles.avatar} />
-      <View>
+      <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{desc}</Text>
       </View>
-    </View>
+      {isNext && <IconNext />}
+    </TouchableOpacity>
   );
 }
 
@@ -22,6 +24,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  content: {
+    flex: 1,
   },
   avatar: {
     width: 46,
@@ -42,7 +48,9 @@ const styles = StyleSheet.create({
 });
 
 ListDoctor.propTypes = {
-  profile: PropTypes.any.isRequired,
+  profile: Image.propTypes.source.isRequired,
   name: PropTypes.string.isRequired,
   desc: PropTypes.string,
+  isNext: PropTypes.bool,
+  onPress: PropTypes.func,
 };

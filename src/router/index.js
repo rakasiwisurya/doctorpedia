@@ -3,6 +3,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {BottomNavigator} from '../components';
 import {
+  Chatting,
+  ChooseDoctor,
   Doctor,
   GetStarted,
   Hospitals,
@@ -71,6 +73,16 @@ export default function Router() {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ChooseDoctor"
+        component={ChooseDoctor}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Chatting"
+        component={Chatting}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

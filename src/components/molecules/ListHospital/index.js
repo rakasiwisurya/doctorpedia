@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 ListHospital.propTypes = {
-  picture: PropTypes.any.isRequired,
+  picture: Image.propTypes.source.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
