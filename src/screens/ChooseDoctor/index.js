@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Header, ListDoctor} from '../../components';
+import {Header, List} from '../../components';
 import {DummyDoctor1} from '../../assets';
 import {colors} from '../../utils';
 
@@ -13,35 +13,35 @@ export default function ChooseDoctor({navigation}) {
         onPress={() => navigation.goBack()}
         isDark
       />
-      <ListDoctor
+      <List
         profile={DummyDoctor1}
         name="Alexander Jannie"
         desc="Wanita"
         isNext
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         profile={DummyDoctor1}
         name="Alexander Jannie"
         desc="Wanita"
         isNext
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         profile={DummyDoctor1}
         name="Alexander Jannie"
         desc="Wanita"
         isNext
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         profile={DummyDoctor1}
         name="Alexander Jannie"
         desc="Wanita"
         isNext
         onPress={() => navigation.navigate('Chatting')}
       />
-      <ListDoctor
+      <List
         profile={DummyDoctor1}
         name="Alexander Jannie"
         desc="Wanita"

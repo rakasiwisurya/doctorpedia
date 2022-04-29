@@ -1,13 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 
-export default function Link({children, size, align}) {
+export default function Link({children, size, align, onPress}) {
   return (
-    <View>
+    <TouchableOpacity onPress={onPress}>
       <Text style={styles.text(size, align)}>{children}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -25,4 +25,5 @@ Link.propTypes = {
   children: PropTypes.string.isRequired,
   size: PropTypes.number,
   align: PropTypes.string,
+  onPress: PropTypes.func,
 };

@@ -9,7 +9,12 @@ import {
   RatedDoctor,
 } from '../../components';
 import {colors, fonts} from '../../utils';
-import {JSONCategoryDoctor} from '../../assets';
+import {
+  DummyDoctor1,
+  DummyDoctor2,
+  DummyDoctor3,
+  JSONCategoryDoctor,
+} from '../../assets';
 
 export default function Doctor({navigation}) {
   return (
@@ -18,7 +23,7 @@ export default function Doctor({navigation}) {
         <View style={styles.content}>
           <View style={styles.wrapperSection}>
             <Gap height={30} />
-            <HomeProfile />
+            <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
             <Text style={styles.welcome}>
               Mau konsultasi dengan siapa hari ini?
             </Text>
@@ -40,9 +45,24 @@ export default function Doctor({navigation}) {
           </View>
           <View style={styles.wrapperSection}>
             <Text style={styles.sectionLabel}>Top Rated Doctors</Text>
-            <RatedDoctor />
-            <RatedDoctor />
-            <RatedDoctor />
+            <RatedDoctor
+              avatar={DummyDoctor1}
+              name="Alexa Rachel"
+              category="Pediatrician"
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <RatedDoctor
+              avatar={DummyDoctor2}
+              name="Sunny Frank"
+              category="Dentist"
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <RatedDoctor
+              avatar={DummyDoctor3}
+              name="Poe Minn"
+              category="Podiatrist"
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
           <NewsItem />

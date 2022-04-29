@@ -20,7 +20,10 @@ export default function Login({navigation}) {
         Sign In
       </Button>
       <Gap height={30} />
-      <Link size={16} align="center">
+      <Link
+        size={16}
+        align="center"
+        onPress={() => navigation.replace('Register')}>
         Create New Account
       </Link>
     </View>
