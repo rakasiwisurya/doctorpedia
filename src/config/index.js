@@ -1,3 +1,1 @@
-import firebaseApp from './firebase';
-
-export {firebaseApp};
+export * from './firebaseConfig';

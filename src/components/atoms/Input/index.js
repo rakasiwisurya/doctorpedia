@@ -3,7 +3,9 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 
-export default function Input({label, value, onChangeText, isSecureTextEntry}) {
+export default function Input(props) {
+  const {label, value, onChangeText, isSecureTextEntry, isDisabled} = props;
+
   const [border, setBorder] = useState(colors.border);
 
   const onFocusForm = () => {
@@ -20,10 +22,12 @@ export default function Input({label, value, onChangeText, isSecureTextEntry}) {
       <TextInput
         onFocus={onFocusForm}
         onBlur={onBlurForm}
-        style={styles.input(border)}
+        style={styles.input(border, isDisabled)}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={isSecureTextEntry}
+        editable={!isDisabled}
+        selectTextOnFocus={!isDisabled}
       />
     </View>
   );
@@ -36,11 +40,13 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     fontFamily: fonts.primary[400],
   },
-  input: border => ({
+  input: (border, isDisabled) => ({
     borderWidth: 1,
     borderColor: border,
     borderRadius: 10,
     padding: 12,
+    color: colors.text.secondary,
+    backgroundColor: isDisabled && colors.border,
   }),
 });
 
@@ -49,4 +55,5 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChangeText: PropTypes.func,
   isSecureTextEntry: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };

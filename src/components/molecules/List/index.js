@@ -6,6 +6,7 @@ import {
   IconEditProfile,
   IconHelp,
   IconLanguange,
+  IconLogout,
   IconNext,
   IconRate,
 } from '../../../assets';
@@ -16,6 +17,7 @@ export default function List({profile, name, desc, isNext, onPress, icon}) {
     if (icon === 'language') return <IconLanguange />;
     if (icon === 'rate') return <IconRate />;
     if (icon === 'help') return <IconHelp />;
+    if (icon === 'logout') return <IconLogout />;
     return <IconEditProfile />;
   };
 

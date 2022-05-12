@@ -1,16 +1,24 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {DummyDoctor6, IconRemovePhoto} from '../../../assets';
+import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-export default function Profile({name, profession, isRemove}) {
+export default function Profile({photo, name, profession, onPress, icon}) {
   return (
     <View style={styles.container}>
-      <View style={styles.borderProfile}>
-        <Image source={DummyDoctor6} style={styles.avatar} />
-        {isRemove && <IconRemovePhoto style={styles.removePhoto} />}
-      </View>
+      {icon ? (
+        <TouchableOpacity style={styles.borderProfile} onPress={onPress}>
+          <Image source={photo ? photo : ILNullPhoto} style={styles.avatar} />
+          {icon === 'remove' && <IconRemovePhoto style={styles.removePhoto} />}
+          {icon === 'add' && <IconAddPhoto style={styles.removePhoto} />}
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.borderProfile} onPress={onPress}>
+          <Image source={photo ? photo : ILNullPhoto} style={styles.avatar} />
+        </View>
+      )}
+
       {!!name && !!profession && (
         <>
           <Text style={styles.name}>{name}</Text>
@@ -62,7 +70,9 @@ const styles = StyleSheet.create({
 });
 
 Profile.propTypes = {
+  photo: PropTypes.oneOfType([PropTypes.object, Image.propTypes.source]),
   name: PropTypes.string,
   profession: PropTypes.string,
-  isRemove: PropTypes.bool,
+  onPress: PropTypes.func,
+  icon: PropTypes.oneOf(['add', 'remove']),
 };

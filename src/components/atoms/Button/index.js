@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
@@ -9,12 +9,16 @@ export default function Button(props) {
   const {variant, children, onPress, iconOnly, btnIconSend, icon, isDisabled} =
     props;
 
-  if (btnIconSend) {
-    return <ButtonIconSend isDisabled={isDisabled} />;
-  }
+  if (btnIconSend) return <ButtonIconSend isDisabled={isDisabled} />;
 
-  if (iconOnly) {
-    return <IconOnly icon={icon} onPress={onPress} />;
+  if (iconOnly) return <IconOnly icon={icon} onPress={onPress} />;
+
+  if (isDisabled) {
+    return (
+      <View style={styles.disableBg}>
+        <Text style={styles.disableText}>{children}</Text>
+      </View>
+    );
   }
 
   return (
@@ -32,6 +36,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
   }),
+  disableBg: {
+    backgroundColor: colors.button.disable.background,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
   text: variant => ({
     fontSize: 18,
     fontFamily: fonts.primary[600],
@@ -40,6 +49,12 @@ const styles = StyleSheet.create({
       (variant === 'primary' && colors.button.primary.text) ||
       (variant === 'secondary' && colors.button.secondary.text),
   }),
+  disableText: {
+    fontSize: 18,
+    fontFamily: fonts.primary[600],
+    textAlign: 'center',
+    color: colors.button.disable.text,
+  },
 });
 
 Button.propTypes = {

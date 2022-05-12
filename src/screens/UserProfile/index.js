@@ -1,15 +1,62 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {getAuth, signOut} from 'firebase/auth';
+import {showMessage} from 'react-native-flash-message';
 import {Gap, Header, List, Profile} from '../../components';
-import {colors} from '../../utils';
+import {colors, getData} from '../../utils';
+import {firebaseApp} from '../../config';
 
 export default function UserProfile({navigation}) {
+  const [profile, setProfile] = useState({
+    photo: null,
+    fullname: null,
+    profession: null,
+  });
+
+  useEffect(() => {
+    getData('user').then(user => {
+      const data = {
+        ...user,
+        photo: user.photo ? {uri: user.photo} : null,
+      };
+
+      setProfile(data);
+    });
+  }, []);
+
+  const handleLogout = () => {
+    const auth = getAuth(firebaseApp);
+    signOut(auth)
+      .then(() => {
+        navigation.reset({
+          routes: [
+            {
+              name: 'GetStarted',
+            },
+          ],
+        });
+      })
+      .catch(error => {
+        console.error(error);
+        showMessage({
+          message: error.message,
+          type: 'default',
+          backgroundColor: colors.error,
+          color: colors.white,
+        });
+      });
+  };
+
   return (
     <View style={styles.screen}>
-      <Header title="Profile" onPress={() => navigation.goBack()} />
+      <Header title="Profile" onPress={() => navigation.replace('MainApp')} />
       <Gap height={10} />
-      <Profile name="Shayna Melinda" profession="Product Designer" />
+      <Profile
+        photo={profile.photo}
+        name={profile.fullname}
+        profession={profile.profession}
+      />
       <Gap height={14} />
       <List
         icon="edit-profile"
@@ -31,6 +78,14 @@ export default function UserProfile({navigation}) {
         isNext
       />
       <List icon="help" name="Help Center" desc="Read our guidelines" isNext />
+
+      <List
+        icon="logout"
+        name="Logout"
+        desc="Clear user session"
+        isNext
+        onPress={handleLogout}
+      />
     </View>
   );
 }

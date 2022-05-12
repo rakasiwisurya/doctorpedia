@@ -2,9 +2,10 @@ import {StyleSheet, View, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {getDatabase, ref, set} from 'firebase/database';
 import {showMessage} from 'react-native-flash-message';
 import {Button, Gap, Header, Input, Loading} from '../../components';
-import {colors} from '../../utils';
+import {colors, storeData} from '../../utils';
 import {useForm} from '../../hooks';
 import {firebaseApp} from '../../config';
 
@@ -18,21 +19,45 @@ export default function Register({navigation}) {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onContinue = () => {
+  const handleContinue = async () => {
+    if (form.password.length < 6) {
+      return showMessage({
+        message: 'Password must be more than 6 characters',
+        type: 'default',
+        backgroundColor: colors.error,
+        color: colors.white,
+      });
+    }
+
     setIsLoading(true);
 
     const auth = getAuth(firebaseApp);
     createUserWithEmailAndPassword(auth, form.email, form.password)
-      .then(credentialUser => {
+      .then(response => {
         setIsLoading(false);
         setForm('reset');
-        navigation.navigate('UploadPhoto');
+
+        const data = {
+          uid: response.user.uid,
+          photo: null,
+          fullname: form.fullname,
+          profession: form.profession,
+          email: form.email,
+        };
+
+        const db = getDatabase(firebaseApp);
+        const dbRef = ref(db, `users/${response.user.uid}/`);
+        set(dbRef, data);
+
+        storeData('user', data);
+
+        navigation.navigate('UploadPhoto', data);
       })
       .catch(error => {
         setIsLoading(false);
-        const errorMessage = error.message;
+        console.error(error);
         showMessage({
-          message: errorMessage,
+          message: error.message,
           type: 'default',
           backgroundColor: colors.error,
           color: colors.white,
@@ -71,7 +96,7 @@ export default function Register({navigation}) {
               isSecureTextEntry
             />
             <Gap height={40} />
-            <Button variant="primary" onPress={onContinue}>
+            <Button variant="primary" onPress={handleContinue}>
               Continue
             </Button>
           </ScrollView>
