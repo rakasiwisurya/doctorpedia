@@ -1,10 +1,9 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {getAuth, signOut} from 'firebase/auth';
-import {showMessage} from 'react-native-flash-message';
 import {Gap, Header, List, Profile} from '../../components';
-import {colors, getData} from '../../utils';
+import {colors, getData, showError} from '../../utils';
 import {firebaseApp} from '../../config';
 
 export default function UserProfile({navigation}) {
@@ -39,12 +38,7 @@ export default function UserProfile({navigation}) {
       })
       .catch(error => {
         console.error(error);
-        showMessage({
-          message: error.message,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
+        showError(error.message);
       });
   };
 
@@ -58,34 +52,41 @@ export default function UserProfile({navigation}) {
         profession={profile.profession}
       />
       <Gap height={14} />
-      <List
-        icon="edit-profile"
-        name="Edit Profile"
-        desc="Last update yesterday"
-        onPress={() => navigation.navigate('UpdateProfile')}
-        isNext
-      />
-      <List
-        icon="language"
-        name="Language"
-        desc="Available 12 languages"
-        isNext
-      />
-      <List
-        icon="rate"
-        name="Give Us Rate"
-        desc="On Google Play Store"
-        isNext
-      />
-      <List icon="help" name="Help Center" desc="Read our guidelines" isNext />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <List
+          icon="edit-profile"
+          name="Edit Profile"
+          desc="Last update yesterday"
+          onPress={() => navigation.navigate('UpdateProfile')}
+          isNext
+        />
+        <List
+          icon="language"
+          name="Language"
+          desc="Available 12 languages"
+          isNext
+        />
+        <List
+          icon="rate"
+          name="Give Us Rate"
+          desc="On Google Play Store"
+          isNext
+        />
+        <List
+          icon="help"
+          name="Help Center"
+          desc="Read our guidelines"
+          isNext
+        />
 
-      <List
-        icon="logout"
-        name="Logout"
-        desc="Clear user session"
-        isNext
-        onPress={handleLogout}
-      />
+        <List
+          icon="logout"
+          name="Logout"
+          desc="Clear user session"
+          isNext
+          onPress={handleLogout}
+        />
+      </ScrollView>
     </View>
   );
 }

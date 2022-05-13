@@ -2,11 +2,10 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {showMessage} from 'react-native-flash-message';
 import {getDatabase, ref, update} from 'firebase/database';
 import {Button, Gap, Header, Link} from '../../components';
 import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
-import {colors, fonts, storeData} from '../../utils';
+import {colors, fonts, showError, storeData} from '../../utils';
 import {firebaseApp} from '../../config';
 
 export default function UploadPhoto({route, navigation}) {
@@ -34,22 +33,12 @@ export default function UploadPhoto({route, navigation}) {
 
       // if any error to upload file
       if (result.errorMessage) {
-        return showMessage({
-          message: errorMessage,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
+        return showError(errorMessage);
       }
 
       // if the file is too large (more than 2MB)
       if (result.assets[0].fileSize > 2097152) {
-        return showMessage({
-          message: 'This file is too large, max file is 2MB',
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
+        return showError('This file is too large, max file is 2MB');
       }
 
       const source = {uri: result.assets[0].uri};

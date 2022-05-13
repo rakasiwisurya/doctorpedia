@@ -8,22 +8,18 @@ import {firebaseApp} from '../../config';
 
 export default function Splash({navigation}) {
   useEffect(() => {
-    const countdown = setTimeout(() => {
-      const auth = getAuth(firebaseApp);
-      onAuthStateChanged(auth, user => {
-        if (user) {
-          // user is logged in
-          navigation.replace('MainApp');
-        } else {
-          // session is expired, user have to login again
-          navigation.replace('GetStarted');
-        }
-      });
-    }, 3000);
+    const auth = getAuth(firebaseApp);
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        // user is logged in
+        navigation.replace('MainApp');
+      } else {
+        // session is expired, user have to login again
+        navigation.replace('GetStarted');
+      }
+    });
 
-    return () => {
-      clearTimeout(countdown);
-    };
+    return () => unsubscribe();
   }, [navigation]);
 
   return (
