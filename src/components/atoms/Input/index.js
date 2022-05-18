@@ -4,7 +4,16 @@ import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 
 export default function Input(props) {
-  const {label, value, onChangeText, isSecureTextEntry, isDisabled} = props;
+  const {
+    label,
+    value,
+    onChangeText,
+    isSecureTextEntry,
+    isDisabled,
+    keyboardType,
+    isMultiline,
+    autoCapitalize,
+  } = props;
 
   const [border, setBorder] = useState(colors.border);
 
@@ -28,6 +37,9 @@ export default function Input(props) {
         secureTextEntry={isSecureTextEntry}
         editable={!isDisabled}
         selectTextOnFocus={!isDisabled}
+        keyboardType={keyboardType ? keyboardType : 'default'}
+        autoCapitalize={autoCapitalize && autoCapitalize}
+        multiline={isMultiline}
       />
     </View>
   );
@@ -56,4 +68,7 @@ Input.propTypes = {
   onChangeText: PropTypes.func,
   isSecureTextEntry: PropTypes.bool,
   isDisabled: PropTypes.bool,
+  keyboardType: PropTypes.string,
+  isMultiline: PropTypes.bool,
+  autoCapitalize: PropTypes.string,
 };

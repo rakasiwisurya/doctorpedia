@@ -52,6 +52,10 @@ export default function Login({navigation}) {
               });
             }
           },
+          error => {
+            console.error(error);
+            showError(error.message);
+          },
           {onlyOnce: true},
         );
       })
@@ -72,12 +76,15 @@ export default function Login({navigation}) {
           label="Email Address"
           value={form.email}
           onChangeText={value => setForm('email', value)}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
         <Gap height={24} />
         <Input
           label="Password"
           value={form.password}
           onChangeText={value => setForm('password', value)}
+          autoCapitalize="none"
           isSecureTextEntry
         />
         <Gap height={10} />

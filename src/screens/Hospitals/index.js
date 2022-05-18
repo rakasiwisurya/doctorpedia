@@ -1,15 +1,48 @@
-import {StyleSheet, Text, View, ImageBackground} from 'react-native';
-import React from 'react';
-import {
-  DummyHospitals1,
-  DummyHospitals2,
-  DummyHospitals3,
-  ILHospitalsBG,
-} from '../../assets';
-import {colors, fonts} from '../../utils';
+import {StyleSheet, Text, View, ImageBackground, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {ILHospitalsBG} from '../../assets';
+import {colors, fonts, showError} from '../../utils';
 import {ListHospital} from '../../components';
+import {getDatabase, onValue, ref} from 'firebase/database';
+import {firebaseApp} from '../../config';
 
 export default function Hospitals() {
+  const [hospitals, setHospitals] = useState([]);
+
+  useEffect(() => {
+    getHospitals();
+  }, []);
+
+  const getHospitals = () => {
+    const db = getDatabase(firebaseApp);
+    onValue(
+      ref(db, 'hospitals/'),
+      snapshots => {
+        if (snapshots.val()) {
+          const data = snapshots.val().map(snapshot => ({
+            ...snapshot,
+            image: {uri: snapshot.image},
+          }));
+          setHospitals(data);
+        }
+      },
+      error => {
+        console.error(error);
+        showError(error.message);
+      },
+      {onlyOnce: true},
+    );
+  };
+
+  const renderListHospital = ({item}) => (
+    <ListHospital
+      picture={item.image}
+      type={item.type}
+      name={item.name}
+      address={item.address}
+    />
+  );
+
   return (
     <View style={styles.screen}>
       <ImageBackground source={ILHospitalsBG} style={styles.background}>
@@ -17,23 +50,10 @@ export default function Hospitals() {
         <Text style={styles.desc}>3 tersedia</Text>
       </ImageBackground>
       <View style={styles.content}>
-        <ListHospital
-          picture={DummyHospitals1}
-          type="Rumah Sakit"
-          name="Citra Bunga Merdeka"
-          address="Jln. Surya Sejahtera 20"
-        />
-        <ListHospital
-          picture={DummyHospitals2}
-          type="Rumah Sakit Anak"
-          name="Happy Family & Kids"
-          address="Jln. Surya Sejahtera 20"
-        />
-        <ListHospital
-          picture={DummyHospitals3}
-          type="Rumah Sakit Jiwa"
-          name="Tingkatan Paling Atas"
-          address="Jln. Surya Sejahtera 20"
+        <FlatList
+          keyExtractor={item => item.id}
+          data={hospitals}
+          renderItem={renderListHospital}
         />
       </View>
     </View>

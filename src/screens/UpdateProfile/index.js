@@ -111,6 +111,10 @@ export default function UpdateProfile({navigation}) {
               navigation.replace('UserProfile');
             }
           },
+          error => {
+            console.error(error);
+            showError(error.message);
+          },
           {onlyOnce: true},
         );
       })

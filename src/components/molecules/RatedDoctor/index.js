@@ -1,10 +1,22 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {IconStar} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-export default function RatedDoctor({avatar, name, category, onPress}) {
+export default function RatedDoctor({avatar, name, category, rate, onPress}) {
+  let [stars, setStars] = useState([]);
+
+  const ratedStar = () => {
+    for (let i = 1; i <= rate; i++) {
+      setStars(prevState => [...prevState, i]);
+    }
+  };
+
+  useEffect(() => {
+    ratedStar();
+  }, [rate]);
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={avatar} style={styles.avatar} />
@@ -13,11 +25,9 @@ export default function RatedDoctor({avatar, name, category, onPress}) {
         <Text style={styles.category}>{category}</Text>
       </View>
       <View style={styles.rate}>
-        <IconStar />
-        <IconStar />
-        <IconStar />
-        <IconStar />
-        <IconStar />
+        {stars.map((values, index) => (
+          <IconStar key={index} />
+        ))}
       </View>
     </TouchableOpacity>
   );
@@ -59,5 +69,6 @@ RatedDoctor.propTypes = {
   avatar: Image.propTypes.source,
   name: PropTypes.string,
   category: PropTypes.string,
+  rate: PropTypes.number,
   onPress: PropTypes.func,
 };

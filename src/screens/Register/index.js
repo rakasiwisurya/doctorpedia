@@ -58,8 +58,8 @@ export default function Register({navigation}) {
   return (
     <View style={styles.screen}>
       <Header title="Daftar Akun" onPress={() => navigation.goBack()} />
-      <View style={styles.content}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
           <Input
             label="Full Name"
             value={form.fullname}
@@ -67,7 +67,7 @@ export default function Register({navigation}) {
           />
           <Gap height={24} />
           <Input
-            label="Pekerjaan"
+            label="Job / Profession"
             value={form.profession}
             onChangeText={value => setForm('profession', value)}
           />
@@ -76,20 +76,23 @@ export default function Register({navigation}) {
             label="Email"
             value={form.email}
             onChangeText={value => setForm('email', value)}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
           <Gap height={24} />
           <Input
             label="Password"
             value={form.password}
             onChangeText={value => setForm('password', value)}
+            autoCapitalize="none"
             isSecureTextEntry
           />
           <Gap height={40} />
           <Button variant="primary" onPress={handleContinue}>
             Continue
           </Button>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }

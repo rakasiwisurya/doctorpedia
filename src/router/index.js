@@ -16,6 +16,8 @@ import {
   UpdateProfile,
   UploadPhoto,
   UserProfile,
+  RegisterDoctor,
+  UploadPhotoDoctor,
 } from '../screens';
 
 const Stack = createNativeStackNavigator();
@@ -101,6 +103,16 @@ export default function Router() {
       <Stack.Screen
         name="DoctorProfile"
         component={DoctorProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="RegisterDoctor"
+        component={RegisterDoctor}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UploadPhotoDoctor"
+        component={UploadPhotoDoctor}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -30,6 +30,14 @@ export default function GetStarted({navigation}) {
           }}>
           Sign In
         </Button>
+        <Gap height={16} />
+        <Button
+          variant="primary"
+          onPress={() => {
+            navigation.navigate('RegisterDoctor');
+          }}>
+          Doctor Registration
+        </Button>
       </View>
     </ImageBackground>
   );
