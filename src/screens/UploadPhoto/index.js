@@ -158,4 +158,11 @@ const styles = StyleSheet.create({
 
 UploadPhoto.propTypes = {
   navigation: PropTypes.object,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      uid: PropTypes.string,
+      fullname: PropTypes.string,
+      profession: PropTypes.string,
+    }),
+  }),
 };

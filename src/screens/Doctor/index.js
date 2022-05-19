@@ -17,9 +17,8 @@ import {
   NewsItem,
   RatedDoctor,
 } from '../../components';
-import {colors, fonts, showError} from '../../utils';
+import {colors, fonts, parseArray, showError} from '../../utils';
 import {firebaseApp} from '../../config';
-import {DummyDoctor1, DummyDoctor2, DummyDoctor3} from '../../assets';
 
 export default function Doctor({navigation}) {
   const db = getDatabase(firebaseApp);
@@ -33,12 +32,6 @@ export default function Doctor({navigation}) {
     getDoctorCategories();
     getTopRatedDoctors();
   }, []);
-
-  const parseArray = listObject => {
-    return Object.keys(listObject)
-      .map(key => ({...listObject[key]}))
-      .sort((a, b) => b.rate - a.rate);
-  };
 
   const getNews = () => {
     onValue(
@@ -114,9 +107,9 @@ export default function Doctor({navigation}) {
                 <Gap width={32} />
                 {doctorCategories.map(item => (
                   <DoctorCategory
-                    key={item.id}
+                    key={`category-${item.id}`}
                     category={item.category}
-                    onPress={() => navigation.navigate('ChooseDoctor')}
+                    onPress={() => navigation.navigate('ChooseDoctor', item)}
                   />
                 ))}
                 <Gap width={22} />
@@ -132,33 +125,15 @@ export default function Doctor({navigation}) {
                 name={doctor.fullname}
                 category={doctor.profession}
                 rate={doctor.rate}
-                onPress={() => navigation.navigate('DoctorProfile')}
+                onPress={() => navigation.navigate('DoctorProfile', doctor)}
               />
             ))}
-            {/* <RatedDoctor
-              avatar={DummyDoctor1}
-              name="Alexa Rachel"
-              category="Pediatrician"
-              onPress={() => navigation.navigate('DoctorProfile')}
-            />
-            <RatedDoctor
-              avatar={DummyDoctor2}
-              name="Sunny Frank"
-              category="Dentist"
-              onPress={() => navigation.navigate('DoctorProfile')}
-            />
-            <RatedDoctor
-              avatar={DummyDoctor3}
-              name="Poe Minn"
-              category="Podiatrist"
-              onPress={() => navigation.navigate('DoctorProfile')}
-            /> */}
             <Text style={styles.sectionLabel}>Good News</Text>
           </View>
           {news.length > 0 &&
             news.map(item => (
               <NewsItem
-                key={item.id}
+                key={`news-${item.id}`}
                 title={item.title}
                 date={item.date}
                 image={item.image}

@@ -30,7 +30,7 @@ export default function HomeProfile({onPress}) {
       />
       <View>
         <Text style={styles.name}>{profile.fullname}</Text>
-        <Text>{profile.profession}</Text>
+        <Text style={styles.profession}>{profile.profession}</Text>
       </View>
     </TouchableOpacity>
   );

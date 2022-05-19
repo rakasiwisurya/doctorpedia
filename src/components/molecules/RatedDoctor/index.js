@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     color: colors.text.secondary,
     marginTop: 2,
+    textTransform: 'capitalize',
   },
   rate: {
     flexDirection: 'row',

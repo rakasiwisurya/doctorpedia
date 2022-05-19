@@ -1,5 +1,6 @@
 import {StyleSheet, ScrollView, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {getDatabase, onValue, ref, update} from 'firebase/database';
@@ -18,6 +19,8 @@ export default function UpdateProfile({navigation}) {
   });
   const [photo, setPhoto] = useState(ILNullPhoto);
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getData('user').then(user => {
