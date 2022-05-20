@@ -6,10 +6,17 @@ import {Button, Gap} from '../../atoms';
 import DarkProfile from './DarkProfile';
 
 export default function Header(props) {
-  const {title, category, onPress, isDark, isDarkProfile} = props;
+  const {title, category, onPress, photo, isDark, isDarkProfile} = props;
 
   if (isDarkProfile) {
-    return <DarkProfile title={title} category={category} onPress={onPress} />;
+    return (
+      <DarkProfile
+        title={title}
+        category={category}
+        onPress={onPress}
+        photo={photo}
+      />
+    );
   }
 
   return (
@@ -49,6 +56,7 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string,
   onPress: PropTypes.func,
+  photo: PropTypes.object,
   isDark: PropTypes.bool,
   isDarkProfile: PropTypes.bool,
 };

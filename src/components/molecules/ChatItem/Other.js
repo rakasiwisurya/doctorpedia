@@ -1,19 +1,17 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
-import {DummyDoctor6} from '../../../assets';
 
-export default function Other() {
+export default function Other({text, time, photo}) {
   return (
     <View style={styles.container}>
-      <Image source={DummyDoctor6} style={styles.avatar} />
+      <Image source={photo} style={styles.avatar} />
       <View>
         <View style={styles.chatContent}>
-          <Text style={styles.text}>
-            Ibu dokter, apakah makan jeruk setiap hari itu buruk?
-          </Text>
+          <Text style={styles.text}>{text}</Text>
         </View>
-        <Text style={styles.date}>4.20 AM</Text>
+        <Text style={styles.time}>{time}</Text>
       </View>
     </View>
   );
@@ -45,10 +43,16 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     color: colors.white,
   },
-  date: {
+  time: {
     fontSize: 11,
     fontFamily: fonts.primary.normal,
     color: colors.text.secondary,
     marginTop: 8,
   },
 });
+
+Other.propTypes = {
+  text: PropTypes.string,
+  time: PropTypes.string,
+  photo: PropTypes.oneOfType([PropTypes.object, Image.propTypes.source]),
+};

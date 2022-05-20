@@ -26,7 +26,7 @@ export default function DoctorProfile({navigation, route}) {
       <View style={styles.action}>
         <Button
           variant="primary"
-          onPress={() => navigation.navigate('Chatting')}>
+          onPress={() => navigation.navigate('Chatting', route.params)}>
           Start Conversation
         </Button>
       </View>

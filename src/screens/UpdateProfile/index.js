@@ -102,7 +102,7 @@ export default function UpdateProfile({navigation}) {
     }
 
     const db = getDatabase(firebaseApp);
-    const dbRef = ref(db, `user/${profile.uid}`);
+    const dbRef = ref(db, `users/${profile.uid}`);
     update(dbRef, data)
       .then(() => {
         dispatch({type: 'SET_LOADING', payload: false});

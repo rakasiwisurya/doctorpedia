@@ -9,7 +9,8 @@ export default function Button(props) {
   const {variant, children, onPress, iconOnly, btnIconSend, icon, isDisabled} =
     props;
 
-  if (btnIconSend) return <ButtonIconSend isDisabled={isDisabled} />;
+  if (btnIconSend)
+    return <ButtonIconSend isDisabled={isDisabled} onPress={onPress} />;
 
   if (iconOnly) return <IconOnly icon={icon} onPress={onPress} />;
 

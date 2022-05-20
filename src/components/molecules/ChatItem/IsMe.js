@@ -1,16 +1,15 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {colors, fonts} from '../../../utils';
 
-export default function IsMe() {
+export default function IsMe({text, time}) {
   return (
     <View style={styles.container}>
       <View style={styles.chatContent}>
-        <Text style={styles.text}>
-          Ibu dokter, apakah makan jeruk setiap hari itu buruk?
-        </Text>
+        <Text style={styles.text}>{text}</Text>
       </View>
-      <Text style={styles.date}>4.20 AM</Text>
+      <Text style={styles.time}>{time}</Text>
     </View>
   );
 }
@@ -34,10 +33,15 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     color: colors.text.primary,
   },
-  date: {
+  time: {
     fontSize: 11,
     fontFamily: fonts.primary.normal,
     color: colors.text.secondary,
     marginTop: 8,
   },
 });
+
+IsMe.propTypes = {
+  text: PropTypes.string,
+  time: PropTypes.string,
+};
