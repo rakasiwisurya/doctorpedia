@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {getDatabase, onValue, push, ref} from 'firebase/database';
+import {getDatabase, onValue, push, ref, set} from 'firebase/database';
 import {ChatItem, Header, InputChat, Loading} from '../../components';
 import {
   colors,
@@ -101,10 +101,30 @@ export default function Chatting({navigation, route}) {
       chatID = `${user.uid}_${uid}`;
     }
 
-    const urlFirebase = `chattings/${chatID}/allChat/${setDateChat(today)}`;
+    const urlChatting = `chattings/${chatID}/allChat/${setDateChat(today)}`;
+    const urlMessagesUser = `messages/${user.uid}/${chatID}`;
+    const urlMessagesDoctor = `messages/${uid}/${chatID}`;
 
-    push(ref(db, urlFirebase), data)
+    const dataHistoryChatForUser = {
+      lastContentChat: text,
+      lastChatDate: today.getTime(),
+      uidPartner: uid,
+    };
+
+    const dataHistoryChatForDoctor = {
+      lastContentChat: text,
+      lastChatDate: today.getTime(),
+      uidPartner: user.uid,
+    };
+
+    push(ref(db, urlChatting), data)
       .then(() => {
+        // set history for user
+        set(ref(db, urlMessagesUser), dataHistoryChatForUser);
+
+        // set history for doctor
+        set(ref(db, urlMessagesDoctor), dataHistoryChatForDoctor);
+
         setText('');
         flatListRef.current.scrollToOffset({animated: false, offset: 0});
       })
@@ -125,7 +145,7 @@ export default function Chatting({navigation, route}) {
           isMe={itemChat.data.sendBy === user.uid}
           text={itemChat.data.chatContent}
           time={itemChat.data.chatTime}
-          photo={itemChat.data.photo && {uri: itemChat.data.photo}}
+          photo={{uri: itemChat.data.photo}}
         />
       ))}
     </View>
