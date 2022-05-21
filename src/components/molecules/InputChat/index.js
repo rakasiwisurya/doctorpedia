@@ -9,6 +9,7 @@ export default function InputChat({value, onChangeText, onButtonPress}) {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
+        placeholderTextColor={colors.text.secondary}
         placeholder="Tulis pesan ..."
         value={value}
         onChangeText={onChangeText}
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     flexDirection: 'row',
-    backgroundColor: colors.white,
+    backgroundColor: colors.darkGray,
   },
   input: {
     backgroundColor: colors.disable,
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: fonts.primary.normal,
     maxHeight: 45,
+    color: colors.text.secondary,
   },
 });
 
